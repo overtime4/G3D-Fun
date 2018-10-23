@@ -38,7 +38,7 @@
 #include <comdef.h>
 #include <comdefsp.h>
 #include "ax.h"
-#include "IEDispatcher.h"
+//#include "IEDispatcher.h"
 
 
 #if G3D_VER < 61000
@@ -49,7 +49,7 @@ HWND hwnd;
 DEFINE_GUID(CLSID_G3d, 0xB323F8E0L, 0x2E68, 0x11D0, 0x90, 0xEA, 0x00, 0xAA, 0x00, 0x60, 0xF8, 0x6F);
 HRESULT hresult;
 IUnknown * punk;
-IDispatch * pdisp = new IEDispatcher();
+//IDispatch * pdisp = new IEDispatcher();
 OLECHAR dat = ((OLECHAR)"SayHello");
 OLECHAR * szMember = &dat;
 DISPID dispid;
@@ -1594,7 +1594,7 @@ int main(int argc, char** argv) {
 	try{
 		hresult = OleInitialize(NULL);
 		hresult = CoCreateInstance(CLSID_G3d, NULL, CLSCTX_SERVER, IID_IUnknown, (void **)&punk);
-		hresult = punk->QueryInterface(IID_IDispatch, &pdisp);
+//		hresult = punk->QueryInterface(IID_IDispatch, &pdisp);
 		if (!AXRegister())
 			return 0;
 
@@ -1634,7 +1634,7 @@ int main(int argc, char** argv) {
 
 		if(hwndMain == NULL)
 		{
-			MessageBox(NULL, "Failed to create HWND",placeholderName+" Crash", MB_OK);
+			MessageBox(NULL, "Failed to create HWND","Crash", MB_OK);
 			return 0;
 		}
 		SendMessage(hwndMain, WM_SETICON, ICON_BIG,(LPARAM)LoadImage(GetModuleHandle(NULL), (LPCSTR)MAKEINTRESOURCEW(IDI_ICON1), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE));

@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "oaidl.h"
 
 class IEDispatcher : public IDispatch
@@ -11,3 +11,4 @@ public:
 	HRESULT IEDispatcher::GetIDsOfNames(const IID &rrid, LPOLESTR *rgszNames, UINT cNames, LCID lcid, DISPID *rgDispId);
 	ULONG IEDispatcher::Release();
 };
+*/
