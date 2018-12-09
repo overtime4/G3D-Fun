@@ -34,7 +34,6 @@ LRESULT CALLBACK PropProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 		case WM_DRAWITEM:
 			{
-				std::cout << "Drawing?" << "\r\n";
 				COLORREF clrBackground;
 				COLORREF clrForeground;
 				TEXTMETRIC tm;
@@ -64,19 +63,42 @@ LRESULT CALLBACK PropProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				GetTextMetrics(lpdis->hDC, &tm);
 				y = (lpdis->rcItem.bottom + lpdis->rcItem.top - tm.tmHeight) / 2;
 				x = LOWORD(GetDialogBaseUnits()) / 4;
+				std::cout << lpdis->itemID << std::endl;
+
+				if(parent == NULL && selectedInstance != NULL)
+				{
+					if(children.size() > 0)
+					{
+						int idx = SendMessage(lpdis->hwndItem, CB_GETLBTEXT, lpdis->itemID, (LPARAM) achTemp);
+						const char * name = children.at(idx)->name.c_str();
+						ExtTextOut(lpdis->hDC, CX_BITMAP + 2 * x, y,
+						ETO_CLIPPED | ETO_OPAQUE, &lpdis->rcItem,
+						name, strlen(name), NULL);
+					}
+				}
 
 				// Get and display the text for the list item.
-				SendMessage(lpdis->hwndItem, CB_GETLBTEXT, lpdis->itemID, (LPARAM) achTemp);
-
+				/*SendMessage(lpdis->hwndItem, CB_GETLBTEXT, lpdis->itemID, (LPARAM) achTemp);
+				
 				hr = StringCchLength(achTemp, 256, &cch);
 				if (FAILED(hr))
 				{
 					// TODO: Write error handler.
-				}
+				}*/
+				int idx = -1;
+				/*if(children.size() > 0)
+				{
+					std::cout << "Found children" << std::endl;
+					if(parent == NULL)
+						idx = lpdis->itemID;
+					else 
+						idx = lpdis->itemID+1;
 
-				ExtTextOut(lpdis->hDC, CX_BITMAP + 2 * x, y,
-					ETO_CLIPPED | ETO_OPAQUE, &lpdis->rcItem,
-					achTemp, (UINT)cch, NULL);
+					Instance * item = children[idx];
+					ExtTextOut(lpdis->hDC, CX_BITMAP + 2 * x, y,
+						ETO_CLIPPED | ETO_OPAQUE, &lpdis->rcItem,
+						item->name.c_str(), strlen(item->name.c_str()), NULL);
+				}*/
 
 				// Restore the previous colors.
 				SetTextColor(lpdis->hDC, clrForeground);
@@ -88,12 +110,15 @@ LRESULT CALLBACK PropProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					break; 
 			 
 				SelectObject(hdc, hbmMask); 
-				BitBlt(lpdis->hDC, x, lpdis->rcItem.top + 1, 
-					CX_BITMAP, CY_BITMAP, hdc, 0, 0, SRCAND); 
+				//BitBlt(lpdis->hDC, x, lpdis->rcItem.top + 1, 
+					//CX_BITMAP, CY_BITMAP, hdc, 0, 0, SRCAND); 
+
 			 
 				SelectObject(hdc, hbmIcon); 
-				BitBlt(lpdis->hDC, x, lpdis->rcItem.top + 1, 
-					CX_BITMAP, CY_BITMAP, hdc, 0, 0, SRCPAINT); 
+				//BitBlt(lpdis->hDC, x, lpdis->rcItem.top + 1, 
+				//	CX_BITMAP, CY_BITMAP, hdc, 0, 0, SRCPAINT);
+
+				TransparentBlt(lpdis->hDC, x, lpdis->rcItem.top + 1, CX_BITMAP, CY_BITMAP, hdc, 0, 0, 16, 16, RGB(255, 0, 255));
 			 
 				DeleteDC(hdc); 
 			  
@@ -225,7 +250,7 @@ bool PropertyWindow::onCreate(int x, int y, int sx, int sy, HMODULE hThisInstanc
 			NULL,
 			"COMBOBOX",
 			"Combo",
-			WS_VISIBLE | WS_CHILD | CBS_DROPDOWNLIST,
+			WS_VISIBLE | WS_CHILD | CBS_DROPDOWNLIST | CBS_OWNERDRAWVARIABLE | CS_HREDRAW | CS_VREDRAW,
 			0,
 			0,
 			0,

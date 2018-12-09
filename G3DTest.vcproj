@@ -74,7 +74,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Advapi32.lib UxTheme.lib Comctl32.lib Comdlg32.lib Shell32.lib"
+				AdditionalDependencies="Advapi32.lib UxTheme.lib Comctl32.lib Comdlg32.lib Shell32.lib Msimg32.lib"
 				OutputFile="./G3DTest.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
@@ -170,7 +170,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Advapi32.lib UxTheme.lib Comctl32.lib Comdlg32.lib Shell32.lib"
+				AdditionalDependencies="Advapi32.lib UxTheme.lib Comctl32.lib Comdlg32.lib Shell32.lib Msimg32.lib"
 				OutputFile="./G3DTest-Debug.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"

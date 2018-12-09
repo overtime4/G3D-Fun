@@ -1856,7 +1856,7 @@ void Demo::run() {
 	cameraSound = GetFileInPath("/content/sounds/SWITCH3.wav");
 	clickSound = GetFileInPath("/content/sounds/switch.wav");
 	dingSound = GetFileInPath("/content/sounds/electronicpingshort.wav");
-    sky = Sky::create(NULL, ExePath() + "/content/sky/");
+    sky = Sky::create(NULL, ExePath() + "/content/sky/", "plainsky/null_plainsky512_*.png");
 
 
 	/*if (GLCaps::supports_GL_ARB_shadow()) {
