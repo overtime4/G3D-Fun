@@ -8,6 +8,7 @@
 #include "DataModel/ImageButtonInstance.h"
 #include "DataModel/DataModelInstance.h"
 #include "DataModel/GuiRootInstance.h"
+#include "DataModel/Script.h"
 #include "CameraController.h"
 #include "AudioPlayer.h"
 #include "Globals.h"
@@ -24,7 +25,8 @@
 #include "PropertyWindow.h"
 #include <commctrl.h>
 #include "StringFunctions.h"
-
+#include "lua.hpp"
+#include "math.h"
 #include "Listener/GUDButtonListener.h"
 #include "Listener/ModeSelectionListener.h"
 #include "Listener/DeleteListener.h"
@@ -67,6 +69,7 @@ void Application::setFocus(bool focus)
 
 Application::Application(HWND parentWindow) : _propWindow(NULL) { //: GApp(settings,window) {
 	
+	
 
 	std::string tempPath = ((std::string)getenv("temp")) + "/"+g_PlaceholderName;
 	CreateDirectory(tempPath.c_str(), NULL);
@@ -75,20 +78,20 @@ Application::Application(HWND parentWindow) : _propWindow(NULL) { //: GApp(setti
 
 	HMODULE hThisInstance = GetModuleHandle(NULL);
 
-	_hwndToolbox = CreateWindowEx(
-		WS_EX_ACCEPTFILES,
-		"AX",
-		"{8856F961-340A-11D0-A96B-00C04FD705A2}",
-		WS_CHILD | WS_VISIBLE,
-		0,
-		560,
-		800,
-		60,
-		_hWndMain, // parent
-		NULL, // menu
-		hThisInstance,
-		NULL
-	);
+	//_hwndToolbox = CreateWindowEx(
+	//	WS_EX_ACCEPTFILES,
+	//	"AX",
+	//	"{8856F961-340A-11D0-A96B-00C04FD705A2}",
+	//	WS_CHILD | WS_VISIBLE,
+	//	0,
+	//	560,
+	//	800,
+	//	60,
+	//	_hWndMain, // parent
+	//	NULL, // menu
+	//	hThisInstance,
+	//	NULL
+	//);
 	
 	_hwndRenderer = CreateWindowEx(
 		WS_EX_ACCEPTFILES,
@@ -132,22 +135,21 @@ Application::Application(HWND parentWindow) : _propWindow(NULL) { //: GApp(setti
 	SetWindowLongPtr(_hWndMain,GWL_USERDATA,(LONG)this);
 	SetWindowLongPtr(_hwndRenderer,GWL_USERDATA,(LONG)this);
 	_propWindow = new PropertyWindow(0, 0, 200, 640, hThisInstance);
-	webBrowser = new IEBrowser(_hwndToolbox);
+//	webBrowser = new IEBrowser(_hwndToolbox);
 	
-	SetWindowLongPtr(_hwndToolbox,GWL_USERDATA+1,(LONG)webBrowser);
-	navigateToolbox("http://androdome.com/res/ClientToolbox.php");
+//	SetWindowLongPtr(_hwndToolbox,GWL_USERDATA+1,(LONG)webBrowser);
+	//navigateToolbox("http://androdome.com/res/ClientToolbox.php");
 	//navigateToolbox(GetFileInPath("/content/page/controller.html"));
 	//navigateToolbox(GetFileInPath("/content/page/controller.html"));
 
 }
-
 void Application::navigateToolbox(std::string path)
 {
-	int len = path.size() + 1;
-	wchar_t * nstr = new wchar_t[len];
-	MultiByteToWideChar(0, 0, path.c_str(), len, nstr, len);
-	webBrowser->navigateSyncURL(nstr);
-	delete[] nstr;
+//	int len = path.size() + 1;
+//	wchar_t * nstr = new wchar_t[len];
+//	MultiByteToWideChar(0, 0, path.c_str(), len, nstr, len);
+//	webBrowser->navigateSyncURL(nstr);
+//	delete[] nstr;
 }
 
 void Application::deleteInstance()
@@ -190,12 +192,18 @@ void Application::onInit()  {
 	//initGUI();
 
 #ifdef LEGACY_LOAD_G3DFUN_LEVEL
+	Script* script = new Script();
+	script->setParent(_dataModel->getWorkspace());
+	script->Source = "print('Test')";
+	script->run();
+
 	PartInstance* test = makePart();
 	test->setParent(_dataModel->getWorkspace());
 	test->color = Color3(0.2F,0.3F,1);
 	test->setSize(Vector3(24,1,24));
 	test->setPosition(Vector3(0,0,0));
 	test->setCFrame(test->getCFrame() * Matrix3::fromEulerAnglesXYZ(0,toRadians(0),toRadians(0)));
+	test->anchored = true;
 	
 
 	
@@ -328,15 +336,6 @@ function eject(Part colliding, Part collider)
 */
 
 double grav = 0.32666666666666666666666666666667;
-void simGrav(PartInstance * collider)
-{
-	if(!collider->anchored)
-	{
-		collider->setPosition(collider->getPosition()+collider->getVelocity());
-		collider->setVelocity(collider->getVelocity()-Vector3(0,grav,0));
-	}
-}
-
 void eject(PartInstance * colliding, PartInstance * collider)
 {
 	if(colliding == collider || !colliding->canCollide || !collider->canCollide)
@@ -346,18 +345,9 @@ void eject(PartInstance * colliding, PartInstance * collider)
 
 }
 
-
-
-void Application::onLogic() {	
-	//PhysicsStart
-	for_each (_dataModel->getWorkspace()->partObjects.begin(), _dataModel->getWorkspace()->partObjects.end(), simGrav);
-	for(size_t i = 0; i < _dataModel->getWorkspace()->partObjects.size(); i++)
-	{
-		for(size_t j = 0; j < _dataModel->getWorkspace()->partObjects.size(); j++)
-		{
-			eject(_dataModel->getWorkspace()->partObjects[i], _dataModel->getWorkspace()->partObjects[j]);
-		}
-	}	
+void Application::onLogic() {
+	std::cout << "update physics\n";
+	//for_each (_dataModel->getWorkspace()->partObjects.begin(), _dataModel->getWorkspace()->partObjects.end(), simGrav);
 }
 
 
@@ -885,6 +875,7 @@ void Application::onMouseWheel(int x,int y,short delta)
 }
 
 void Application::run() {
+	
 	g_usableApp = this;
 	//setDebugMode(false);
 	//debugController.setActive(false);
@@ -988,8 +979,8 @@ void Application::resizeWithParent(HWND parentWindow)
 {
 	RECT rect;
 	GetClientRect(parentWindow,&rect);
-	SetWindowPos(_hwndRenderer,NULL,0,0,rect.right,rect.bottom-60,SWP_NOMOVE);
-	SetWindowPos(_hwndToolbox,NULL,0,rect.bottom-60,rect.right,60,SWP_NOACTIVATE | SWP_SHOWWINDOW);
+	SetWindowPos(_hwndRenderer,NULL,0,0,rect.right,rect.bottom,SWP_NOMOVE);
+//	SetWindowPos(_hwndToolbox,NULL,0,rect.bottom-60,rect.right,60,SWP_NOACTIVATE | SWP_SHOWWINDOW);
 	GetClientRect(_hwndRenderer,&rect);
 	int viewWidth=rect.right;
 	int viewHeight=rect.bottom;

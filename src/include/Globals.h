@@ -1,7 +1,6 @@
 #pragma once
 #include "DataModel/DataModelInstance.h"
 
-
 class Application;
 
 class Globals

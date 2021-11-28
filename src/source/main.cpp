@@ -9,7 +9,10 @@
 #include "ax.h"
 #include <commctrl.h>
 #include "ErrorFunctions.h"
-
+#include "lua.hpp"
+#if LUA_VERSION_NUM < 501
+	#error Requires Lua 5.1
+#endif
 #if G3D_VER < 61000
 	#error Requires G3D 6.10
 #endif
@@ -147,6 +150,7 @@ LRESULT CALLBACK G3DProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 int main(int argc, char** argv) {
 	try{
+		std::cout << "Running " << LUA_VERSION << "\n";
 		hresult = OleInitialize(NULL);
 
 /*		IInternetSecurityManager *pSecurityMgr;

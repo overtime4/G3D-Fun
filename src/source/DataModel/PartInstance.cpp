@@ -1,9 +1,9 @@
 #include "DataModel/PartInstance.h"
 #include "Globals.h"
+#include "Application.h"
 #include <sstream>
 #include <iomanip>
-
-
+#include <typeinfo>
 PartInstance::PartInstance(void) : _bevelSize(0.07f), _parseVert(0), _debugTimer(0)
 {
 	PVInstance::PVInstance();
@@ -74,6 +74,10 @@ void PartInstance::postRender(RenderDevice *rd)
 			glEnable(GL_DEPTH_TEST); 
 		}
 	}
+}
+
+void PartInstance::runSimulation()
+{
 }
 
 void PartInstance::setParent(Instance* prnt)

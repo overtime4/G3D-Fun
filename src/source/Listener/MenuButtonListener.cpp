@@ -9,6 +9,10 @@ void MenuButtonListener::onButton1MouseClick(BaseButtonInstance* button)
 		g_dataModel->toggleRun();
 		((ToggleImageButtonInstance*)button)->checked = g_dataModel->isRunning();
 	}
+	else if(button->name == "exit")
+	{
+		g_usableApp->QuitApp();
+	}
 	else if(button->name == "file")
 	{
 		HMENU mainmenu = CreatePopupMenu();

@@ -1,6 +1,5 @@
 #include "DataModel/TextButtonInstance.h"
 
-
 TextButtonInstance::TextButtonInstance(void)
 {
 	BaseButtonInstance::BaseButtonInstance();

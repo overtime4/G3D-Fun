@@ -33,10 +33,12 @@ DataModelInstance::DataModelInstance(void)
 	running = false;
 	
 }
-
 void DataModelInstance::toggleRun()
 {
 	running = !running;
+	if(running)
+	{
+	}
 }
 bool DataModelInstance::isRunning()
 {

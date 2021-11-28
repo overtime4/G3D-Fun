@@ -9,13 +9,13 @@
 class PartInstance : public PVInstance
 {
 public:
-	
 	PartInstance(void);
 	PartInstance(const PartInstance &oinst);
 	Instance* clone() const { return new PartInstance(*this); }
 	virtual void PartInstance::postRender(RenderDevice* rd);
 	~PartInstance(void);
 	virtual void render(RenderDevice*);
+	void runSimulation();
 	Enum::SurfaceType::Value top;
 	Enum::SurfaceType::Value front;
 	Enum::SurfaceType::Value right;

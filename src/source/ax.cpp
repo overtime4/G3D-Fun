@@ -2,6 +2,7 @@
 #include "ax.h"
 #include "AudioPlayer.h"
 #include "Enum.h"
+#include "ole2.h"
 
 #pragma warning (disable: 4311)
 #pragma warning (disable: 4312)
@@ -505,10 +506,10 @@ HRESULT _stdcall AXClientSite :: Invoke(
   EXCEPINFO FAR* pExcepInfo,
   unsigned int FAR* puArgErr)
 {
-	IEBrowser * browser = (IEBrowser *)GetWindowLongPtr(Window,GWL_USERDATA+1);
-	return browser->doExternal(m_lastExternalName,dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
+	//IEBrowser * browser = (IEBrowser *)GetWindowLongPtr(Window,GWL_USERDATA+1);
+	//return browser->doExternal(m_lastExternalName,dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
 	
-	//return S_OK;
+	return S_OK;
 }
 
 

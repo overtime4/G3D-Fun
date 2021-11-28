@@ -50,7 +50,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;.\src\include&quot;"
+				AdditionalIncludeDirectories=".\src\lua514_Win32\include;.\src\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -75,10 +75,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Advapi32.lib Comctl32.lib Comdlg32.lib Shell32.lib"
+				AdditionalDependencies="lua5.1.lib Advapi32.lib Comctl32.lib Comdlg32.lib Shell32.lib Ole32.lib"
+				ShowProgress="0"
 				OutputFile="./Blocks3D.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories=".\src\lua514_Win32\lib"
 				ProgramDatabaseFile=".\Release/Blocks3D.pdb"
 				SubSystem="2"
 				TargetMachine="1"
@@ -118,7 +120,7 @@
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="2"
+			CharacterSet="0"
 			ManagedExtensions="0"
 			>
 			<Tool
@@ -145,7 +147,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;.\src\include&quot;"
+				AdditionalIncludeDirectories=".\src\lua514_Win32\include;.\src\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -172,10 +174,14 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Advapi32.lib UxTheme.lib Comctl32.lib Comdlg32.lib Shell32.lib Urlmon.lib ole32.lib oleaut32.lib uuid.lib"
+				AdditionalDependencies="tokamak_d.lib lua5.1.lib Advapi32.lib UxTheme.lib Comctl32.lib Comdlg32.lib Shell32.lib Urlmon.lib ole32.lib oleaut32.lib uuid.lib"
+				ShowProgress="0"
 				OutputFile="./Blocks3D-Debug.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="&quot;.\src\lua514_Win32\lib&quot;"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="LIBCMT"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/Blocks3D.pdb"
 				SubSystem="1"
@@ -380,11 +386,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\source\DataModel\LocalBackpackItem.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\source\DataModel\PartInstance.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\src\source\DataModel\PVInstance.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\source\DataModel\Script.cpp"
 					>
 				</File>
 				<File
@@ -585,11 +599,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\include\DataModel\LocalBackpackItem.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\include\DataModel\PartInstance.h"
 					>
 				</File>
 				<File
 					RelativePath=".\src\include\DataModel\PVInstance.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\include\DataModel\Script.h"
 					>
 				</File>
 				<File

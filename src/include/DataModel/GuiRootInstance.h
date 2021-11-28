@@ -5,12 +5,15 @@ class ImageButtonInstance;
 
 class TextButtonInstance;
 
+class LocalBackpackItem;
+
 class GuiRootInstance : public Instance
 {
 public:
 	GuiRootInstance();
 	GuiRootInstance::~GuiRootInstance();
 	TextButtonInstance*		makeTextButton();
+	LocalBackpackItem*		makeLocalBackpackItem();
 	void					drawButtons(RenderDevice* rd);
 	ImageButtonInstance*	makeImageButton(G3D::TextureRef newImage, G3D::TextureRef overImage, G3D::TextureRef downImage, G3D::TextureRef disableImage);
 	void					renderGUI(G3D::RenderDevice* rd, double fps);

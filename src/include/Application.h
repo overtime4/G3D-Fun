@@ -61,6 +61,7 @@ class Application { // : public GApp {
 		void changeTool(Tool *);
 		Mouse mouse;
 	private:
+		int					fElapsed;
 		bool				mouseMoveState;
 		RenderDevice*		renderDevice;
 		//void				initGUI();
@@ -81,7 +82,7 @@ class Application { // : public GApp {
 		int					_mode;
 		GAppSettings		_settings;
 		double lightProjX, lightProjY, lightProjNear, lightProjFar;
-		IEBrowser*		webBrowser;
+		//IEBrowser*		webBrowser;
 	protected:
 		Stopwatch           m_graphicsWatch;
 		Stopwatch           m_logicWatch;
