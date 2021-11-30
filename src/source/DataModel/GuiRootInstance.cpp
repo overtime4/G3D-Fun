@@ -150,20 +150,7 @@ GuiRootInstance::GuiRootInstance() : _message(""), _messageTime(0)
 	instance->name = "ZoomOut";
 	instance->setButtonListener(new CameraButtonListener());
 	
-	instance = new ToggleImageButtonInstance(
-		Texture::fromFile(GetFileInPath("/content/images/Run.png")),
-		Texture::fromFile(GetFileInPath("/content/images/Run_ovr.png")),
-		Texture::fromFile(GetFileInPath("/content/images/Run_dn.png")),
-		NULL,		
-		Texture::fromFile(GetFileInPath("/content/images/Stop.png")),
-		Texture::fromFile(GetFileInPath("/content/images/Stop_ovr.png")),
-		Texture::fromFile(GetFileInPath("/content/images/Stop_dn.png"))
-		);
-	instance->setButtonListener(new MenuButtonListener());
-	instance->name = "go";
-	instance->size = Vector2(65,65);
-	instance->position = Vector2(6.5, 25);
-	instance->setParent(this);
+	
 }
 
 
