@@ -1,4 +1,5 @@
 #include "DataModel/LocalBackpackItem.h"
+#include "Application.h"
 #include <iostream>
 LocalBackpackItem::LocalBackpackItem(){
 	Size = Vector2(100,100);
@@ -25,6 +26,7 @@ void LocalBackpackItem::onMouseClick()
 		item_selected = true;
 		std::cout << "Equip";
 	}
+	listener->onButton1MouseClick(this,item_selected);
 }
 
 void LocalBackpackItem::drawObj(RenderDevice* rd, Vector2 mousePos, bool mouseDown)

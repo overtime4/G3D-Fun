@@ -376,7 +376,7 @@ void Application::onSimulation(RealTime rdt, SimTime sdt, SimTime idt) {
 	if(_dataModel->name != _title)
 	{
 		_title = _dataModel->name;
-		std::string text = "Game \"" + _title + "\"";
+		std::string text = "Roblox - [" + _title + "]";
 		SetWindowText(_hWndMain, text.c_str());
 		
 	}

@@ -322,6 +322,10 @@
 				Name="Listener"
 				>
 				<File
+					RelativePath=".\src\source\Listener\BackpackListener.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\source\Listener\ButtonListener.cpp"
 					>
 				</File>
@@ -518,6 +522,10 @@
 			<Filter
 				Name="Listener"
 				>
+				<File
+					RelativePath=".\src\include\Listener\BackpackListener.h"
+					>
+				</File>
 				<File
 					RelativePath=".\src\include\Listener\ButtonListener.h"
 					>

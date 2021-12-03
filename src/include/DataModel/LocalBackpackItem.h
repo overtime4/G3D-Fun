@@ -1,5 +1,6 @@
 #pragma once
 #include "DataModel/TextButtonInstance.h"
+#include "Listener/BackpackListener.h"
 
 class LocalBackpackItem : public TextButtonInstance
 {
@@ -15,5 +16,5 @@ public:
 //	Vector2 boxBegin;
 //	Vector2 boxEnd;
 protected:
-	class ButtonListener* listener;
+	class BackpackListener* listener;
 };

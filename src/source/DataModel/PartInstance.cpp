@@ -514,6 +514,7 @@ void PartInstance::render(RenderDevice* rd) {
 	float radius = 0.5F;
 	//if(nameShown)
 		//postRenderStack.push_back(this);
+	
  	if (changed)
 	{
 		

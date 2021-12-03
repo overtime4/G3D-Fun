@@ -11,6 +11,7 @@
 #include "Globals.h"
 #include "StringFunctions.h"
 
+#include "Listener/BackpackListener.h"
 #include "Listener/GUDButtonListener.h"
 #include "Listener/ModeSelectionListener.h"
 #include "Listener/MenuButtonListener.h"
@@ -18,6 +19,10 @@
 #include "Listener/CameraButtonListener.h"
 #include "Listener/DeleteListener.h"
 #include "Listener/ToolbarListener.h"
+#include "Tool/Tool.h"
+#include "Tool/ArrowTool.h"
+
+#include "Application.h"
 
 
 ImageButtonInstance* GuiRootInstance::makeImageButton(G3D::TextureRef newImage = NULL, G3D::TextureRef overImage = NULL, G3D::TextureRef downImage = NULL, G3D::TextureRef disableImage = NULL)
@@ -96,11 +101,13 @@ GuiRootInstance::GuiRootInstance() : _message(""), _messageTime(0)
 	button->name = "exit";
 	button->setButtonListener(new MenuButtonListener());
 
+	BackpackListener *listener = new BackpackListener();
+
 	button = makeLocalBackpackItem();
 	button->setParent(this);
 	button->font = g_fntlighttrek;
 	button->title = "Test";
-	//button->name = "item";
+	button->setButtonListener(listener);
 
 	ImageButtonInstance* instance = makeImageButton(
 		Texture::fromFile(GetFileInPath("/content/images/CameraTiltUp.png")),

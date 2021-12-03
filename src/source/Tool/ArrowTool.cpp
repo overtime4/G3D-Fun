@@ -15,6 +15,7 @@ ArrowTool::~ArrowTool(void)
 
 void ArrowTool::onButton1MouseDown(Mouse mouse)
 {
+	
 	mouseDownStartx = mouse.x;
 	mouseDownStarty = mouse.y;
 	mouseDown = true;
@@ -29,6 +30,7 @@ void ArrowTool::onButton1MouseDown(Mouse mouse)
 }
 void ArrowTool::onButton1MouseUp(Mouse mouse)
 {
+	
 	if(dragging)
 		this->setCursor(GetFileInPath("/content/images/ArrowCursor.png"));
 	mouseDown = false;
@@ -37,6 +39,7 @@ void ArrowTool::onButton1MouseUp(Mouse mouse)
 
 void ArrowTool::onMouseMoved(Mouse mouse)
 {
+	
 	if(mouseDown)
 	{
 		if(!dragging)
@@ -69,6 +72,7 @@ void ArrowTool::onSelect(Mouse mouse)
 
 void ArrowTool::onKeyDown(int key)
 {
+	
 	if(key == VK_CONTROL)
 	{
 		lctrlDown = true;
@@ -77,6 +81,7 @@ void ArrowTool::onKeyDown(int key)
 
 void ArrowTool::onKeyUp(int key)
 {
+	
 	if(key == VK_CONTROL)
 		lctrlDown = false;
 }
