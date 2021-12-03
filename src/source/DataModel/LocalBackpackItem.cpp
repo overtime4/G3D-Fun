@@ -55,7 +55,7 @@ void LocalBackpackItem::drawObj(RenderDevice* rd, Vector2 mousePos, bool mouseDo
 
 	Vector3 keypoint1;
 	Vector3 keypoint2;
-	keypoint1 = Vector3(point1.x + 2, point2.y - 22 ,0);
+	keypoint1 = Vector3(point1.x, point2.y - 20 ,0);
 	keypoint2 = keypoint1 + Vector3(20,20,0);
 
 	//Draw::box(Box(midpoint1, midpoint2), rd, Color4(1.0F,1.0F,1.0F,0.2F), boxOutlineColorDis);
